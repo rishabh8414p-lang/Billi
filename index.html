@@ -340,6 +340,19 @@ function render(){
 }
 window.addEventListener('hashchange',render);
 initSupabase().finally(()=>render());
+window.addEventListener("hashchange", render);
+
+(async function () {
+    await initSupabase();
+
+    if (supabaseClient) {
+        const { data } = await supabaseClient.auth.getSession();
+        currentUser = data.session?.user || null;
+    }
+
+    render();
+})(); h
+render());
 </script>
-</body>
-</html>
+</body>  
+</html>  
